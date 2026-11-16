@@ -1,0 +1,29 @@
+
+version: "2.4"
+
+services:
+  pix-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: localhost/arqvora-pix:integrado
+    container_name: arqvora-pix-api
+    restart: unless-stopped
+
+    network_mode: "host"
+
+    env_file:
+      - .env
+
+    environment:
+      SERVER_PORT: "8083"
+      SERVER_ADDRESS: "127.0.0.1"
+
+      # Banco compartilhado com Saldo
+      DB_URL: "jdbc:mysql://127.0.0.1:3307/saldo_db?serverTimezone=UTC"
+      DB_USER: "saldo"
+      DB_PASSWORD: "saldo_dev_only"
+
+      # Desativa o cadastro de dados demo
+      SPRING_PROFILES_ACTIVE: "default"

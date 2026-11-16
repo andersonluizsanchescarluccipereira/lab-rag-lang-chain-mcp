@@ -1,0 +1,33 @@
+server:
+  port: 8083
+  error:
+    include-message: never
+spring:
+  application:
+    name: pix-chave-api
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3309/pix_db?serverTimezone=UTC}
+    username: ${DB_USER:pix}
+    password: ${DB_PASSWORD:pix_demo_only}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  jackson:
+    time-zone: UTC
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+app:
+  jwt:
+    secret-base64: ${JWT_SECRET_BASE64}
+    expiration-minutes: ${JWT_EXPIRATION_MINUTES:60}
+  pix:
+    lookup-hmac-secret-base64: ${PIX_LOOKUP_SECRET_BASE64}
+    institution: ARQVORA Bank Lab
+    lookup-max-per-minute: 20

@@ -1,0 +1,7 @@
+spring:
+  config:
+    activate:
+      on-profile: demo
+  jpa:
+    hibernate:
+      ddl-auto: update # Exclusivamente para banco isolado do laboratorio.
